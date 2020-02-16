@@ -3,17 +3,24 @@ SSH Client for Windows previous 10
 
 download "installer_source" of:
 http://www.mls-software.com/opensshd.html
+(extract it to the same folder cuz it already has a "openssh" folder included.
 download the newest .tar.xz:
 ftp://ftp-stud.hs-esslingen.de/pub/Mirrors/sources.redhat.com/cygwin/x86_64/release/openssh/
+(extract it to the name like the archive)
 
 or use the "cygwin_source*.zip" of the previous mls-software link
 
-create a batch file with the following content:
+create a batch file in the same path where you extracted the previous files with the following content:
 ```
 if not exist %WinDir%\System32\OpenSSH mkdir %WinDir%\System32\OpenSSH
 xcopy openssh\bin64\* %WinDir%\System32\OpenSSH\ /i /d /y /he /C
 for /f %%i in ('dir /s /b /o:n /a:d ^| findstr openssh-* ^| findstr \usr\bin') do xcopy %%i\* %WinDir%\System32\OpenSSH\ /i /d /y /he /C
 ```
+
+so files should now look like this:
+openssh\
+openssh-8.0p1-2\
+install-openssh.bat
 
 It will create a folder "OpenSSH" in example "C:\Windows\System32"
 copy the content of the cygwin "installer_source" to it and search for the openssh-"version" folder and also copy the content to it.
